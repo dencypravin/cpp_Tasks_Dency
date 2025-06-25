@@ -5,7 +5,6 @@
 
 namespace fs = std::filesystem;
 
-// Simple XOR Encryption/Decryption Function
 std::string xorEncryptDecrypt(const std::string &text, char key = 'K') {
     std::string output = text;
     for (char &c : output) {
@@ -14,11 +13,10 @@ std::string xorEncryptDecrypt(const std::string &text, char key = 'K') {
     return output;
 }
 
-// Function to store encrypted file
+
 void storeFile() {
     std::string country, state, district, description;
-    std::cin.ignore();  // flush newline
-
+    std::cin.ignore();  
     std::cout << "Enter Country: ";
     std::getline(std::cin, country);
     std::cout << "Enter State: ";
@@ -28,7 +26,7 @@ void storeFile() {
     std::cout << "Enter Description: ";
     std::getline(std::cin, description);
 
-    // Create directory
+ 
     fs::path dirPath = "./data/" + country + "/" + state + "/" + district;
     try {
         fs::create_directories(dirPath);
@@ -37,7 +35,7 @@ void storeFile() {
         return;
     }
 
-    // Prepare file content
+    
     std::string content = "Country: " + country + "\nState: " + state + "\nDistrict: " + district + "\nDescription: " + description;
     std::string encrypted = xorEncryptDecrypt(content);
 
@@ -85,7 +83,6 @@ void retrieveFile() {
     std::cout << "\n--- File Content ---\n" << decrypted << "\n";
 }
 
-// Main menu
 int main() {
     while (true) {
         std::cout << "\nChoose an option:\n1. Store a new file\n2. Retrieve and view a file\n3. Exit\nEnter choice: ";
